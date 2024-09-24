@@ -64,3 +64,73 @@ export default function StatefullForm() {
 
 ```
 
+## useRef and set default cursor to input field
+```markdown
+import React, { useEffect, useRef } from 'react'
+
+export default function Ref() {
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+
+  const handleForm = e => {
+    e.preventDefault();
+    console.log(nameRef.current.value)
+    console.log(emailRef.current.value)
+
+  }
+
+  // default set cursor in input field
+  useEffect(() => {
+    nameRef.current.focus();
+  }, [])
+
+  return (
+    <form onSubmit={handleForm} className="flex flex-col items-center justify-center my-60">
+      <input className="p-2 border border-gray-500" ref={nameRef} type="text" name="name" /> <br /> <br />
+      <input className="p-2 border border-gray-500" ref={emailRef} type="email" name="email" /> <br />
+      <input type="submit" />
+    </form>
+  )
+}
+
+```
+## Custom Hook form
+### Custom Hook
+```markdown
+import { useState } from "react"
+
+const useInputState = (defaultValue = null) => {
+    const [value, setValue] = useState(defaultValue);
+
+    const handleChange = e => {
+        setValue(e.target.value);
+    }
+    return [value, handleChange]
+}
+export default useInputState;
+```
+
+### Use of custom hook
+```markdown
+import useInputState from "../hooks/useInputState"
+
+
+export default function HookForm() {
+    const [name, handleNameChange] = useInputState('');
+    const [email, handleEmailChange] = useInputState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(name, email)
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center my-60">
+            <input value={name} onChange={handleNameChange} className="border border-gray-500" type="text" name="name" /> <br /> <br />
+            <input onChange={handleEmailChange} className="border border-gray-500" type="email" name="email" /> <br />
+            <input type="submit" />
+        </form>
+    )
+}
+```
+

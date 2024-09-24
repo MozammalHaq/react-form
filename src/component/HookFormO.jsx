@@ -7,7 +7,7 @@ export default function HookFormO() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(nameState, emailState)
+        console.log(nameState.value, emailState)
     }
 
     return (

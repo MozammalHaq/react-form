@@ -4,6 +4,7 @@ import SimpleForm from './component/SimpleForm'
 import StatefullForm from './component/StatefullForm'
 import Ref from './component/Ref'
 import HookForm from './component/HookForm'
+import HookFormO from './component/HookFormO'
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
       {/* <SimpleForm/> */}
       {/* <StatefullForm/> */}
       {/* <Ref/> */}
-      <HookForm/>
+      {/* <HookForm/> */}
+      <HookFormO/>
     </>
   )
 }

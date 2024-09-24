@@ -95,7 +95,7 @@ export default function Ref() {
 
 ```
 ## Custom Hook form
-### Custom Hook
+### 1. Custom Hook, return as Array
 ```markdown
 import { useState } from "react"
 
@@ -134,3 +134,46 @@ export default function HookForm() {
 }
 ```
 
+### 1. Custom Hook, return as Object
+```markdown
+import { useState } from "react"
+
+const useInputStateO = (defaultValue = null) => {
+    const [value, setValue] = useState(defaultValue);
+
+    const onChange = e => {
+        setValue(e.target.value);
+    }
+
+    return {
+        value,
+        onChange
+    }
+}
+export default useInputStateO;
+```
+
+### Use of custom hook
+```markdown
+
+import useInputStateO from "../hooks/useInputStateO";
+
+export default function HookFormO() {
+    const nameState = useInputStateO('');
+    const emailState = useInputStateO('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(nameState, emailState)
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center my-60">
+            <input {...nameState} className="border border-gray-500" type="text" name="name" /> <br /> <br />
+            <input {...emailState} className="border border-gray-500" type="email" name="email" /> <br />
+            <input type="submit" />
+        </form>
+    )
+}
+
+```

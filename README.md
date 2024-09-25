@@ -1,4 +1,4 @@
-# React Form hanlde
+# React Form hanlde & Context API
 
 ## Normally
 ```markdown
@@ -235,4 +235,39 @@ function App() {
 
 export default App
 
+```
+
+## Context API
+## Create and Provide Context
+```markdonw
+import { createContext } from 'react'
+import Parent from './component/context/Parent'
+
+export const FirstContext = createContext("");
+
+function App() {
+
+  return (
+    <>
+      <FirstContext.Provider value="Context Value">
+        <Parent />
+      </FirstContext.Provider>
+    </>
+  )
+}
+export default App
+```
+
+## Use Context
+```markdonw
+import React, { useContext } from 'react'
+import { FirstContext } from '../../App';
+
+
+export default function GrandChild() {
+    const data = useContext(FirstContext);
+    return (
+        <div>GrandChild: {data}</div>
+    )
+}
 ```
